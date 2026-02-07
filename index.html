@@ -33,9 +33,9 @@ body{
   overflow:hidden;
 }
 
-/* floating hearts */
+/* floating hearts background */
 body::before{
-  content:"💗 💕 💖 💞 💓 💘 💝";
+  content:"💗 💕 💖 💞 💓 💘 💝 💗 💕 💖 💞 💓 💘 💝";
   position:fixed;
   font-size:22px;
   opacity:.12;
@@ -44,6 +44,7 @@ body::before{
   animation:float 35s linear infinite;
   pointer-events:none;
 }
+
 @keyframes float{
   from{transform:translateY(0)}
   to{transform:translateY(-50%)}
@@ -80,14 +81,14 @@ h1{
   margin-bottom:30px;
 }
 
-/* zone grows with screen */
+/* buttons zone */
 .button-zone{
   position:relative;
   width:100%;
   height:clamp(150px,28vh,220px);
 }
 
-/* buttons (bigger for thumbs) */
+/* buttons */
 button{
   position:absolute;
   padding:18px 30px;
@@ -107,6 +108,10 @@ button{
   transform:translateY(-50%);
   background:linear-gradient(45deg,var(--pink3),var(--pink4));
   color:white;
+}
+
+#yesBtn:hover{
+  transform:translateY(-50%) scale(1.08);
 }
 
 #noBtn{
@@ -131,6 +136,21 @@ button{
   from{opacity:0;transform:scale(.9)}
   to{opacity:1;transform:scale(1)}
 }
+
+/* music button */
+#musicToggle{
+  position:fixed;
+  bottom:18px;
+  right:18px;
+  z-index:1000;
+  border:none;
+  border-radius:50%;
+  width:48px;
+  height:48px;
+  font-size:20px;
+  background:white;
+  box-shadow:0 6px 18px rgba(0,0,0,.2);
+}
 </style>
 </head>
 
@@ -154,13 +174,15 @@ button{
   </div>
 </div>
 
-<script>
-const zone = document.getElementById("zone");
-const yesBtn = document.getElementById("yesBtn");
-const noBtn = document.getElementById("noBtn");
-const result = document.getElementById("result");
+<!-- MUSIC -->
+<audio id="bgMusic" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
 
-/* responsive confetti */
+<button id="musicToggle">🔊</button>
+
+<script>
+/* ================= CONFETTI ================= */
 const canvas = document.getElementById("confettiCanvas");
 function resize(){
   canvas.width = window.innerWidth;
@@ -179,14 +201,19 @@ function celebrate(){
   });
 }
 
-/* grow yes */
+/* ================= BUTTON LOGIC ================= */
+const zone = document.getElementById("zone");
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const result = document.getElementById("result");
+
 let scale = 1;
+
 function growYes(){
   scale += .08;
   yesBtn.style.transform = `translateY(-50%) scale(${scale})`;
 }
 
-/* mobile-safe random move */
 function moveNo(){
   const rect = zone.getBoundingClientRect();
   const padding = 10;
@@ -201,7 +228,6 @@ function moveNo(){
   growYes();
 }
 
-/* works for both mouse + touch */
 zone.addEventListener("pointermove", e=>{
   const b = noBtn.getBoundingClientRect();
   const d = Math.hypot(
@@ -211,7 +237,6 @@ zone.addEventListener("pointermove", e=>{
   if(d < 120) moveNo();
 });
 
-/* tap no also runs */
 noBtn.addEventListener("pointerdown", moveNo);
 
 yesBtn.addEventListener("click", ()=>{
@@ -219,6 +244,34 @@ yesBtn.addEventListener("click", ()=>{
   result.style.display="block";
   celebrate();
 });
+
+/* ================= MUSIC ================= */
+const music = document.getElementById("bgMusic");
+const toggle = document.getElementById("musicToggle");
+
+let started = false;
+
+function startMusic(){
+  if(started) return;
+  started = true;
+
+  music.volume = 0;
+  music.play();
+
+  let v = 0;
+  const fade = setInterval(()=>{
+    v += 0.05;
+    music.volume = v;
+    if(v >= 0.6) clearInterval(fade);
+  },120);
+}
+
+document.body.addEventListener("pointerdown", startMusic, { once:true });
+
+toggle.onclick = ()=>{
+  music.muted = !music.muted;
+  toggle.textContent = music.muted ? "🔈" : "🔊";
+};
 </script>
 
 </body>
