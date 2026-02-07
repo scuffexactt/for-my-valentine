@@ -132,6 +132,16 @@
       from { opacity: 0; transform: scale(.9); }
       to { opacity: 1; transform: scale(1); }
     }
+
+    /* typing cursor */
+    #loveLetter::after {
+      content: "|";
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
   </style>
 </head>
 
@@ -153,6 +163,7 @@
     <h2>YAY SNEHA!! 🥰💗</h2>
     <p>You just made my whole year brighter ✨</p>
     <p>I love you more than all the stars ⭐</p>
+    <p id="loveLetter" style="margin-top:14px; font-weight:600; color:#555;"></p>
   </div>
 
 </div>
@@ -207,10 +218,24 @@
     if (d < 120) moveNo(e.clientX, e.clientY);
   });
 
+  /* typing love letter */
+  const letterText =
+    "From the moment you came into my life, everything feels softer, brighter, and happier. Thank you for being my favorite person in the world 💖";
+
+  const letterEl = document.getElementById("loveLetter");
+
+  function typeLetter(text, i = 0) {
+    if (i < text.length) {
+      letterEl.textContent += text.charAt(i);
+      setTimeout(() => typeLetter(text, i + 1), 35);
+    }
+  }
+
   yesBtn.addEventListener("click", () => {
     zone.style.display = "none";
     result.style.display = "block";
     celebrate();
+    setTimeout(() => typeLetter(letterText), 600);
   });
 </script>
 
