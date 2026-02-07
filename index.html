@@ -1,217 +1,265 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>For Sneha 💌</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>For Sneha 💌</title>
 
-  <!-- cute + handwritten fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&family=Pacifico&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600&display=swap" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+<style>
+:root{
+  --pink:#ff7aa8;
+  --pink2:#ffc2da;
+  --lav:#efe3ff;
+  --text:#5b335f;
+}
 
-  <style>
-    :root{
-      --pink:#ff7aa8;
-      --soft:#fff4f8;
-      --lav:#f3e8ff;
-      --text:#5c3b53;
-    }
+*{box-sizing:border-box;}
 
-    *{box-sizing:border-box;}
+body{
+  margin:0;
+  min-height:100svh;
+  font-family:"Quicksand",sans-serif;
+  color:var(--text);
+  overflow:hidden;
 
-    body{
-      margin:0;
-      min-height:100vh;
-      display:grid;
-      place-items:center;
-      font-family:"Quicksand",sans-serif;
-      color:var(--text);
-      overflow:hidden;
+  background:
+    radial-gradient(circle at 25% 20%, #fff0f6, transparent 40%),
+    radial-gradient(circle at 80% 80%, #f3e8ff, transparent 40%),
+    linear-gradient(135deg,var(--pink2),var(--lav));
 
-      background:
-        radial-gradient(circle at 20% 20%, #fff0f6, transparent 40%),
-        radial-gradient(circle at 80% 80%, #f3e8ff, transparent 40%),
-        linear-gradient(135deg,#ffd6e7,#e9d5ff);
-    }
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+}
 
-    /* floating hearts */
-    body::before{
-      content:"💗 💕 💖 💞 💘 💓";
-      position:fixed;
-      font-size:60px;
-      opacity:.06;
-      letter-spacing:50px;
-      white-space:nowrap;
-      animation:float 28s linear infinite;
-    }
+/* floating hearts background */
+body::before{
+  content:"💗 💕 💖 💞 💓 💘";
+  position:fixed;
+  font-size:52px;
+  opacity:.06;
+  letter-spacing:45px;
+  animation:float 26s linear infinite;
+  white-space:nowrap;
+}
 
-    @keyframes float{
-      from{transform:translateY(110vh);}
-      to{transform:translateY(-120vh);}
-    }
+@keyframes float{
+  from{transform:translateY(110vh);}
+  to{transform:translateY(-120vh);}
+}
 
-    #confettiCanvas{
-      position:fixed;
-      inset:0;
-      pointer-events:none;
-      z-index:999;
-    }
+/* envelope */
+.envelope{
+  width:100%;
+  max-width:420px;
+  height:200px;
+  background:#fff;
+  border-radius:22px;
+  box-shadow:0 18px 50px rgba(0,0,0,.15);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  position:relative;
+  font-weight:600;
+  transition:.4s;
+}
 
-    .card{
-      width:min(680px,92vw);
-      max-height:85vh;
-      overflow:auto;
-      padding:40px 32px;
+.envelope:active{transform:scale(.97);}
 
-      background:rgba(255,255,255,.75);
-      backdrop-filter:blur(18px);
-      border-radius:28px;
-      box-shadow:0 25px 70px rgba(0,0,0,.12);
-    }
+.envelope span{
+  font-size:20px;
+}
 
-    .title{
-      font-family:"Pacifico",cursive;
-      font-size:38px;
-      text-align:center;
-      color:var(--pink);
-      margin-bottom:18px;
-    }
+/* letter card */
+.card{
+  display:none;
+  width:100%;
+  max-width:420px;
+  max-height:85vh;
+  overflow:auto;
 
-    .letter{
-      line-height:1.8;
-      font-size:18px;
-      white-space:pre-line;
-      animation:fadeIn 1.2s ease;
-    }
+  background:rgba(255,255,255,.78);
+  backdrop-filter:blur(18px);
+  border-radius:26px;
+  padding:26px 22px;
+  box-shadow:0 25px 70px rgba(0,0,0,.15);
 
-    @keyframes fadeIn{
-      from{opacity:0;transform:translateY(10px);}
-      to{opacity:1;}
-    }
+  animation:pop .35s ease;
+}
 
-    .question{
-      margin-top:28px;
-      text-align:center;
-      font-weight:600;
-      font-size:22px;
-    }
+@keyframes pop{
+  from{opacity:0;transform:scale(.92);}
+  to{opacity:1;}
+}
 
-    .button-zone{
-      position:relative;
-      height:130px;
-      margin-top:14px;
-    }
+.title{
+  font-family:"Pacifico",cursive;
+  font-size:34px;
+  text-align:center;
+  color:var(--pink);
+  margin-bottom:12px;
+}
 
-    button{
-      position:absolute;
-      top:50%;
-      transform:translateY(-50%);
-      padding:14px 26px;
-      border:none;
-      border-radius:999px;
-      font-size:16px;
-      font-weight:600;
-      cursor:pointer;
-      box-shadow:0 8px 20px rgba(0,0,0,.15);
-      transition:.18s ease;
-    }
+/* letter text */
+.letter{
+  font-size:16px;
+  line-height:1.7;
+  white-space:pre-line;
+  min-height:140px;
+  margin-bottom:18px;
+}
 
-    #yesBtn{
-      left:20%;
-      background:linear-gradient(45deg,#ff6aa2,#ff8bc2);
-      color:white;
-    }
+/* question */
+.question{
+  text-align:center;
+  font-weight:600;
+  font-size:20px;
+  margin-bottom:12px;
+}
 
-    #yesBtn:hover{
-      transform:translateY(-50%) scale(1.1);
-    }
+/* mobile big buttons */
+.button-zone{
+  position:relative;
+  height:140px;
+}
 
-    #noBtn{
-      left:60%;
-      background:#fff;
-    }
+button{
+  position:absolute;
+  width:120px;
+  height:50px;
+  border:none;
+  border-radius:999px;
+  font-size:16px;
+  font-weight:600;
+  cursor:pointer;
+  box-shadow:0 8px 20px rgba(0,0,0,.15);
+}
 
-    .result{
-      display:none;
-      margin-top:24px;
-      text-align:center;
-      font-family:"Pacifico",cursive;
-      font-size:34px;
-      color:#ff4d8d;
-      animation:fadeIn .5s ease;
-    }
-  </style>
+#yesBtn{
+  left:10%;
+  background:linear-gradient(45deg,#ff6aa2,#ff8bc2);
+  color:white;
+}
+
+#noBtn{
+  right:10%;
+  background:white;
+}
+
+.result{
+  display:none;
+  text-align:center;
+  font-family:"Pacifico";
+  font-size:30px;
+  color:#ff4d8d;
+  margin-top:16px;
+}
+
+#confettiCanvas{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:999;
+}
+
+/* small phones */
+@media (max-width:380px){
+  button{width:105px;height:46px;}
+}
+</style>
 </head>
 
 <body>
 
 <canvas id="confettiCanvas"></canvas>
 
-<div class="card">
+<!-- envelope intro -->
+<div class="envelope" id="envelope">
+  <span>Tap to open 💌</span>
+</div>
 
-  <div class="title">Dear Sneha 💌</div>
+<!-- letter -->
+<div class="card" id="card">
 
-  <div class="letter">
-I don’t know when it happened,
-but somewhere between our laughs,
-our random talks,
-and the little moments we share…
+  <div class="title">Dear Sneha 💕</div>
 
-you became my favorite person.
+  <div class="letter" id="letterText"></div>
 
-You make ordinary days feel special,
-and my world feels softer when you're around.
+  <div class="question">Will you be my Valentine?</div>
 
-So I made this tiny page,
-just to ask you something simple but important 🤍
-  </div>
-
-  <div class="question">
-    Will you be my Valentine?
-  </div>
-
-  <section class="button-zone" id="zone">
-    <button id="yesBtn">Yes 💕</button>
+  <div class="button-zone" id="zone">
+    <button id="yesBtn">Yes 💖</button>
     <button id="noBtn">No 🙈</button>
-  </section>
-
-  <div class="result" id="result">
-    She said YES!! 💖✨
   </div>
+
+  <div class="result" id="result">She said YES!! 🎉✨</div>
 
 </div>
 
 <script>
+/* ---------- envelope open ---------- */
+const envelope=document.getElementById("envelope");
+const card=document.getElementById("card");
+
+envelope.onclick=()=>{
+  envelope.style.display="none";
+  card.style.display="block";
+  typeLetter();
+};
+
+/* ---------- typewriter text ---------- */
+const message=`Somehow you became my favorite person.
+
+Your smile makes my day softer.
+Your laugh feels like home.
+
+So I made this tiny love note
+just to ask you something special 💗`;
+
+const letter=document.getElementById("letterText");
+
+function typeLetter(){
+  let i=0;
+  const interval=setInterval(()=>{
+    letter.textContent+=message[i];
+    i++;
+    if(i>=message.length) clearInterval(interval);
+  },25);
+}
+
+/* ---------- confetti ---------- */
+const confettiInstance=confetti.create(
+  document.getElementById("confettiCanvas"),
+  {resize:true}
+);
+
+function celebrate(){
+  confettiInstance({
+    particleCount:350,
+    spread:130,
+    startVelocity:60,
+    origin:{x:.5,y:.6}
+  });
+}
+
+/* ---------- buttons ---------- */
 const zone=document.getElementById("zone");
 const yesBtn=document.getElementById("yesBtn");
 const noBtn=document.getElementById("noBtn");
 const result=document.getElementById("result");
 
-const canvas=document.getElementById("confettiCanvas");
-canvas.width=window.innerWidth;
-canvas.height=window.innerHeight;
-
-const confettiInstance=confetti.create(canvas,{resize:true});
-
-/* confetti */
-function celebrate(){
-  confettiInstance({
-    particleCount:350,
-    spread:140,
-    startVelocity:55,
-    origin:{x:.5,y:.6}
-  });
-}
-
-/* grow yes */
 let scale=1;
+
 function growYes(){
   scale+=.1;
-  yesBtn.style.transform=`translateY(-50%) scale(${scale})`;
+  yesBtn.style.transform=`scale(${scale})`;
 }
 
-/* runaway no */
 function clamp(n,min,max){return Math.max(min,Math.min(max,n));}
 
 function moveNo(px,py){
@@ -221,10 +269,11 @@ function moveNo(px,py){
   let dx=(b.left+b.width/2)-px;
   let dy=(b.top+b.height/2)-py;
   let mag=Math.hypot(dx,dy)||1;
+
   dx/=mag; dy/=mag;
 
-  let newLeft=(b.left-z.left)+dx*150;
-  let newTop=(b.top-z.top)+dy*150;
+  let newLeft=(b.left-z.left)+dx*120;
+  let newTop=(b.top-z.top)+dy*120;
 
   newLeft=clamp(newLeft,0,z.width-b.width);
   newTop=clamp(newTop,0,z.height-b.height);
@@ -238,10 +287,9 @@ function moveNo(px,py){
 zone.addEventListener("pointermove",e=>{
   const b=noBtn.getBoundingClientRect();
   const d=Math.hypot((b.left+b.width/2)-e.clientX,(b.top+b.height/2)-e.clientY);
-  if(d<130) moveNo(e.clientX,e.clientY);
+  if(d<120) moveNo(e.clientX,e.clientY);
 });
 
-/* yes click */
 yesBtn.onclick=()=>{
   zone.style.display="none";
   result.style.display="block";
