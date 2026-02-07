@@ -5,10 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>For Sneha 💖</title>
 
+  <!-- Confetti library -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 
-  <!-- Softer fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Pacifico&display=swap" rel="stylesheet">
+  <!-- Cute fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Pacifico&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -16,7 +17,7 @@
       --pink2: #ffd6ea;
       --pink3: #ff6fa9;
       --pink4: #ff3b8d;
-      --card: rgba(255,255,255,.85);
+      --card: rgba(255,255,255,.8);
     }
 
     * {
@@ -31,14 +32,15 @@
       place-items: center;
       background: linear-gradient(135deg, var(--pink1), var(--pink2));
       overflow: hidden;
+      position: relative;
     }
 
-    /* floating hearts */
+    /* floating hearts background */
     body::before {
       content: "💗 💕 💖 💞 💓 💘 💝 💗 💕 💖 💞 💓 💘 💝";
       position: fixed;
-      font-size: 24px;
-      opacity: .12;
+      font-size: 26px;
+      opacity: .15;
       animation: float 25s linear infinite;
       line-height: 80px;
       width: 200%;
@@ -57,55 +59,57 @@
     }
 
     .card {
-      width: min(640px, 94vw);
-      padding: 36px 26px;
+      width: min(680px, 92vw);
+      padding: 40px 28px;
       background: var(--card);
-      backdrop-filter: blur(16px);
-      border-radius: 26px;
+      backdrop-filter: blur(18px);
+      border-radius: 28px;
       text-align: center;
-      box-shadow: 0 20px 50px rgba(255,105,160,.22);
+      box-shadow: 0 25px 60px rgba(255,105,160,.25);
+      z-index: 2;
     }
 
-    /* ✨ SMALLER + THINNER TITLE */
     h1 {
       font-family: "Pacifico", cursive;
-      font-size: clamp(20px, 3.2vw, 28px);
-      font-weight: 400;
-      margin-bottom: 6px;
-      color: #555;
+      font-size: clamp(28px, 4vw, 42px);
+      margin-bottom: 8px;
+      color: #444;
     }
 
     .subtitle {
-      font-size: 13px;
-      opacity: .65;
-      margin-bottom: 26px;
+      font-size: 14px;
+      opacity: .7;
+      margin-bottom: 30px;
     }
 
-    /* BUTTON AREA */
     .button-zone {
       position: relative;
       width: 100%;
-      height: 150px;
+      height: 160px;
     }
 
     button {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      padding: 14px 22px;
-      font-size: 15px;
-      font-weight: 600;
+      padding: 16px 26px;
+      font-size: 16px;
+      font-weight: 700;
       border-radius: 999px;
       border: none;
       cursor: pointer;
       transition: .2s;
-      box-shadow: 0 8px 20px rgba(0,0,0,.12);
+      box-shadow: 0 10px 24px rgba(0,0,0,.15);
     }
 
     #yesBtn {
       left: 18%;
       background: linear-gradient(45deg, var(--pink3), var(--pink4));
       color: white;
+    }
+
+    #yesBtn:hover {
+      transform: translateY(-50%) scale(1.08);
     }
 
     #noBtn {
@@ -115,28 +119,29 @@
 
     .result {
       display: none;
-      margin-top: 16px;
+      margin-top: 18px;
       animation: pop .4s ease;
     }
 
     @keyframes pop {
-      from { opacity: 0; transform: scale(.95); }
+      from { opacity: 0; transform: scale(.9); }
       to { opacity: 1; transform: scale(1); }
     }
 
     .letter {
-      margin-top: 14px;
-      padding: 16px;
-      border-radius: 16px;
+      margin-top: 16px;
+      padding: 18px;
+      border-radius: 18px;
       background: #fff0f6;
       line-height: 1.7;
       white-space: pre-line;
-      font-size: 14px;
+      font-size: 15px;
+      box-shadow: inset 0 0 12px rgba(255,105,160,.15);
+      min-height: 160px;
       text-align: left;
-      box-shadow: inset 0 0 10px rgba(255,105,160,.12);
-      min-height: 140px;
     }
 
+    /* blinking cursor */
     .letter::after {
       content: "|";
       animation: blink 1s infinite;
@@ -145,29 +150,6 @@
 
     @keyframes blink {
       50% { opacity: 0; }
-    }
-
-    /* 📱 MOBILE RESPONSIVE */
-    @media (max-width: 520px) {
-      .card {
-        padding: 26px 18px;
-      }
-
-      .button-zone {
-        height: 130px;
-      }
-
-      button {
-        font-size: 14px;
-        padding: 12px 18px;
-      }
-
-      #yesBtn { left: 10%; }
-      #noBtn { left: 55%; }
-
-      .letter {
-        font-size: 13px;
-      }
     }
   </style>
 </head>
@@ -187,7 +169,7 @@
   </div>
 
   <div class="result" id="result">
-    <h2 style="color:#ff3b8d; font-weight:600;">For Sneha 💌</h2>
+    <h2>For Sneha 💌</h2>
     <div class="letter" id="loveLetter"></div>
   </div>
 
@@ -200,53 +182,79 @@
   const result = document.getElementById("result");
   const letterEl = document.getElementById("loveLetter");
 
+  /* CONFETTI */
   const canvas = document.getElementById("confettiCanvas");
   const confettiInstance = confetti.create(canvas, { resize: true });
 
   function celebrate() {
-    confettiInstance({ particleCount: 350, spread: 140, startVelocity: 60 });
+    confettiInstance({
+      particleCount: 350,
+      spread: 140,
+      startVelocity: 60
+    });
   }
 
+  /* YES grows */
   let scale = 1;
   function growYes() {
     scale += 0.1;
     yesBtn.style.transform = `translateY(-50%) scale(${scale})`;
   }
 
+  /* NO runs away */
   function moveNo() {
     const rect = zone.getBoundingClientRect();
-    noBtn.style.left = Math.random() * (rect.width - 100) + "px";
-    noBtn.style.top = Math.random() * (rect.height - 60) + "px";
+    const x = Math.random() * (rect.width - 100);
+    const y = Math.random() * (rect.height - 60);
+
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
     noBtn.style.transform = "none";
+
     growYes();
   }
 
-  zone.addEventListener("pointermove", () => moveNo());
+  zone.addEventListener("pointermove", e => {
+    const b = noBtn.getBoundingClientRect();
+    const d = Math.hypot(
+      (b.left + b.width/2) - e.clientX,
+      (b.top + b.height/2) - e.clientY
+    );
+    if (d < 120) moveNo();
+  });
 
-  const message = `Hi baby 💖
+  /* LOVE LETTER TYPING */
+  const message = `Hi Sneha 💖
 
 From the moment you came into my life,
 everything feels softer, warmer, and happier.
 
 Your smile makes my worst days better.
 Your laugh is my favorite sound.
+And being with you is my favorite place.
+
+So I made this tiny website
+just to ask you something special...
 
 Will you stay my Valentine forever? 💕
 
-Yours always ❤️`;
+— Yours always ❤️`;
 
   function typeLetter(text, speed = 35) {
-    let i = 0;
     letterEl.textContent = "";
+    let i = 0;
+
     function type() {
       if (i < text.length) {
-        letterEl.textContent += text[i++];
+        letterEl.textContent += text.charAt(i);
+        i++;
         setTimeout(type, speed);
       }
     }
     type();
   }
 
+  /* YES CLICK */
   yesBtn.addEventListener("click", () => {
     zone.style.display = "none";
     result.style.display = "block";
