@@ -84,38 +84,33 @@ h1{
 }
 
 /* ---------------- BUTTONS ---------------- */
-.button-zone{
-  display:flex;
-  justify-content:center;
-  gap:14px;
-  flex-wrap:wrap;
-  position:relative;
-  min-height:90px;
+/* ===== Buttons ===== */
+const zone = document.getElementById("zone");
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const result = document.getElementById("result");
+
+let scale = 1;
+
+function growYes(){
+  scale += .08;
+  yesBtn.style.transform = `translateY(-50%) scale(${scale})`;
 }
 
-button{
-  padding:10px 18px;
-  font-size:13px;
-  border:none;
-  border-radius:999px;
-  font-weight:600;
-  cursor:pointer;
-  transition:.2s;
-  box-shadow:0 6px 16px rgba(0,0,0,.12);
+function moveNo(){
+  const rect = zone.getBoundingClientRect();
+  noBtn.style.left = Math.random()*(rect.width-100)+"px";
+  noBtn.style.top = Math.random()*(rect.height-50)+"px";
+  noBtn.style.transform = "none";
+  growYes();
 }
 
-button:active{transform:scale(.95)}
-
-#yesBtn{
-  background:linear-gradient(45deg,var(--pink3),var(--pink4));
-  color:#fff;
-}
-#yesBtn:hover{transform:scale(1.08)}
-
-#noBtn{
-  background:#eee;
-  position:relative;
-}
+zone.addEventListener("pointermove", e=>{
+  const b=noBtn.getBoundingClientRect();
+  const d=Math.hypot((b.left+b.width/2)-e.clientX,(b.top+b.height/2)-e.clientY);
+  if(d<120) moveNo();
+});
+noBtn.addEventListener("pointerdown", moveNo);
 
 /* ---------------- RESULT ---------------- */
 .result{
@@ -203,17 +198,13 @@ document.addEventListener("pointerdown",()=>{
 },{once:true});
 
 /* ---------- CONFETTI CENTER ---------- */
-const confettiInstance=confetti.create(
-  document.getElementById("confettiCanvas"),
-  {resize:true}
-);
+const canvas = document.getElementById("confettiCanvas");
+canvas.width = innerWidth;
+canvas.height = innerHeight;
+const confettiInstance = confetti.create(canvas,{resize:true});
 
 function celebrate(){
-  confettiInstance({
-    particleCount:300,
-    spread:140,
-    origin:{x:0.5,y:0.5}
-  });
+  confettiInstance({particleCount:300,spread:140,startVelocity:60});
 }
 
 /* ---------- YES grows ---------- */
