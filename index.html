@@ -8,7 +8,7 @@
   <!-- Confetti -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 
-  <!-- Cute Google font -->
+  <!-- Cute font -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
 
   <style>
@@ -125,22 +125,28 @@
     .result h2 {
       font-size: 34px;
       color: var(--pink4);
-      margin-bottom: 6px;
+      margin-bottom: 10px;
+    }
+
+    /* typing letter */
+    .letter {
+      font-size: 16px;
+      line-height: 1.7;
+      white-space: pre-line;
+      min-height: 110px;
+      border-right: 3px solid var(--pink4);
+      display: inline-block;
+      padding-right: 4px;
+      animation: blink .8s infinite;
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent; }
     }
 
     @keyframes pop {
       from { opacity: 0; transform: scale(.9); }
       to { opacity: 1; transform: scale(1); }
-    }
-
-    /* typing cursor */
-    #loveLetter::after {
-      content: "|";
-      animation: blink 1s infinite;
-    }
-
-    @keyframes blink {
-      50% { opacity: 0; }
     }
   </style>
 </head>
@@ -161,9 +167,7 @@
 
   <div class="result" id="result">
     <h2>YAY SNEHA!! 🥰💗</h2>
-    <p>You just made my whole year brighter ✨</p>
-    <p>I love you more than all the stars ⭐</p>
-    <p id="loveLetter" style="margin-top:14px; font-weight:600; color:#555;"></p>
+    <p id="letter" class="letter"></p>
   </div>
 
 </div>
@@ -173,8 +177,9 @@
   const yesBtn = document.getElementById("yesBtn");
   const noBtn = document.getElementById("noBtn");
   const result = document.getElementById("result");
+  const letterEl = document.getElementById("letter");
 
-  /* confetti */
+  /* ===== Confetti ===== */
   const canvas = document.getElementById("confettiCanvas");
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
@@ -189,15 +194,43 @@
     });
   }
 
-  /* yes grows */
+  /* ===== Typing Letter ===== */
+  const message = `
+From the moment you smiled at me,
+my world got brighter ✨
+
+Thank you for being sweet,
+kind, and the cutest person ever.
+
+Happy Valentine’s Day Sneha 💖
+I love you more than all the stars ⭐
+Forever yours 💕
+`;
+
+  function typeLetter(text, speed = 35) {
+    let i = 0;
+    letterEl.textContent = "";
+
+    const typing = setInterval(() => {
+      letterEl.textContent += text[i];
+      i++;
+
+      if (i >= text.length) {
+        clearInterval(typing);
+        celebrate();
+      }
+    }, speed);
+  }
+
+  /* ===== Yes grows ===== */
   let scale = 1;
   function growYes() {
     scale += .1;
     yesBtn.style.transform = `translateY(-50%) scale(${scale})`;
   }
 
-  /* no runs away */
-  function moveNo(x, y) {
+  /* ===== No runs away ===== */
+  function moveNo() {
     const rect = zone.getBoundingClientRect();
     const nx = Math.random() * (rect.width - 100);
     const ny = Math.random() * (rect.height - 60);
@@ -215,27 +248,14 @@
       (b.left + b.width/2) - e.clientX,
       (b.top + b.height/2) - e.clientY
     );
-    if (d < 120) moveNo(e.clientX, e.clientY);
+    if (d < 120) moveNo();
   });
 
-  /* typing love letter */
-  const letterText =
-    "From the moment you came into my life, everything feels softer, brighter, and happier. Thank you for being my favorite person in the world 💖";
-
-  const letterEl = document.getElementById("loveLetter");
-
-  function typeLetter(text, i = 0) {
-    if (i < text.length) {
-      letterEl.textContent += text.charAt(i);
-      setTimeout(() => typeLetter(text, i + 1), 35);
-    }
-  }
-
+  /* ===== YES click ===== */
   yesBtn.addEventListener("click", () => {
     zone.style.display = "none";
     result.style.display = "block";
-    celebrate();
-    setTimeout(() => typeLetter(letterText), 600);
+    typeLetter(message);
   });
 </script>
 
