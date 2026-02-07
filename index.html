@@ -1,138 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>For Sneha 💖</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>For Sneha 💖</title>
 
-  <!-- Confetti -->
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
 
-  <!-- Cute Google font -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --pink1:#ffe6f0;
+  --pink2:#ffd1e6;
+  --pink3:#ff6fa9;
+  --pink4:#ff3b8d;
+}
 
-  <style>
-    :root {
-      --pink1: #ffe6f0;
-      --pink2: #ffd1e6;
-      --pink3: #ff6fa9;
-      --pink4: #ff3b8d;
-      --lavender: #f5e9ff;
-      --card: rgba(255,255,255,.75);
-    }
+*{
+  box-sizing:border-box;
+  font-family:"Poppins",sans-serif;
+  -webkit-tap-highlight-color:transparent;
+}
 
-    * {
-      box-sizing: border-box;
-      font-family: "Poppins", sans-serif;
-    }
+body{
+  margin:0;
+  min-height:100vh;
+  padding:env(safe-area-inset-top) 16px env(safe-area-inset-bottom);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(135deg,var(--pink1),#f5e9ff);
+  overflow:hidden;
+}
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      background: linear-gradient(135deg, var(--pink1), var(--lavender));
-      overflow: hidden;
-    }
+/* floating hearts */
+body::before{
+  content:"💗 💕 💖 💞 💓 💘 💝";
+  position:fixed;
+  font-size:22px;
+  opacity:.12;
+  width:200%;
+  height:200%;
+  animation:float 35s linear infinite;
+  pointer-events:none;
+}
+@keyframes float{
+  from{transform:translateY(0)}
+  to{transform:translateY(-50%)}
+}
 
-    /* floating hearts background */
-    body::before {
-      content: "💗 💕 💖 💞 💓 💘 💝";
-      position: fixed;
-      font-size: 26px;
-      width: 200%;
-      height: 200%;
-      opacity: .15;
-      animation: float 30s linear infinite;
-      line-height: 80px;
-    }
+#confettiCanvas{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:999;
+}
 
-    @keyframes float {
-      from { transform: translateY(0); }
-      to { transform: translateY(-50%); }
-    }
+/* card */
+.card{
+  width:100%;
+  max-width:520px;
+  padding:32px 22px 36px;
+  text-align:center;
+  background:rgba(255,255,255,.85);
+  backdrop-filter:blur(18px);
+  border-radius:26px;
+  box-shadow:0 25px 60px rgba(255,105,160,.25);
+}
 
-    #confettiCanvas {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 999;
-    }
+h1{
+  font-size:clamp(22px,6vw,34px);
+  margin-bottom:8px;
+  color:#444;
+}
 
-    .card {
-      width: min(650px, 92vw);
-      padding: 36px 26px;
-      text-align: center;
-      background: var(--card);
-      backdrop-filter: blur(16px);
-      border-radius: 28px;
-      box-shadow: 0 25px 60px rgba(255,105,160,.25);
-    }
+.subtitle{
+  font-size:14px;
+  opacity:.7;
+  margin-bottom:30px;
+}
 
-    h1 {
-      font-size: clamp(26px, 4vw, 42px);
-      margin-bottom: 8px;
-      color: #444;
-    }
+/* zone grows with screen */
+.button-zone{
+  position:relative;
+  width:100%;
+  height:clamp(150px,28vh,220px);
+}
 
-    .subtitle {
-      opacity: .7;
-      font-size: 15px;
-      margin-bottom: 26px;
-    }
+/* buttons (bigger for thumbs) */
+button{
+  position:absolute;
+  padding:18px 30px;
+  font-size:18px;
+  font-weight:700;
+  border:none;
+  border-radius:999px;
+  cursor:pointer;
+  touch-action:manipulation;
+  box-shadow:0 10px 24px rgba(0,0,0,.15);
+  transition:.2s;
+}
 
-    .button-zone {
-      position: relative;
-      width: 100%;
-      height: 160px;
-    }
+#yesBtn{
+  left:15%;
+  top:50%;
+  transform:translateY(-50%);
+  background:linear-gradient(45deg,var(--pink3),var(--pink4));
+  color:white;
+}
 
-    button {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      padding: 16px 26px;
-      font-size: 17px;
-      font-weight: 700;
-      border-radius: 999px;
-      border: none;
-      cursor: pointer;
-      transition: .2s;
-      box-shadow: 0 10px 24px rgba(0,0,0,.15);
-    }
+#noBtn{
+  left:60%;
+  top:50%;
+  transform:translateY(-50%);
+  background:#e5e7eb;
+}
 
-    #yesBtn {
-      left: 18%;
-      background: linear-gradient(45deg, var(--pink3), var(--pink4));
-      color: white;
-    }
+.result{
+  display:none;
+  margin-top:24px;
+  animation:pop .4s ease;
+}
 
-    #yesBtn:hover {
-      transform: translateY(-50%) scale(1.08);
-    }
+.result h2{
+  font-size:28px;
+  color:var(--pink4);
+}
 
-    #noBtn {
-      left: 62%;
-      background: #e5e7eb;
-    }
-
-    .result {
-      display: none;
-      margin-top: 20px;
-      animation: pop .4s ease;
-    }
-
-    .result h2 {
-      font-size: 34px;
-      color: var(--pink4);
-      margin-bottom: 6px;
-    }
-
-    @keyframes pop {
-      from { opacity: 0; transform: scale(.9); }
-      to { opacity: 1; transform: scale(1); }
-    }
-  </style>
+@keyframes pop{
+  from{opacity:0;transform:scale(.9)}
+  to{opacity:1;transform:scale(1)}
+}
+</style>
 </head>
 
 <body>
@@ -140,7 +139,6 @@
 <canvas id="confettiCanvas"></canvas>
 
 <div class="card">
-
   <h1>Sneha, will you be my Valentine? 💖</h1>
   <div class="subtitle">I made this little website just for you ✨</div>
 
@@ -154,64 +152,73 @@
     <p>You just made my whole year brighter ✨</p>
     <p>I love you more than all the stars ⭐</p>
   </div>
-
 </div>
 
 <script>
-  const zone = document.getElementById("zone");
-  const yesBtn = document.getElementById("yesBtn");
-  const noBtn = document.getElementById("noBtn");
-  const result = document.getElementById("result");
+const zone = document.getElementById("zone");
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const result = document.getElementById("result");
 
-  /* confetti */
-  const canvas = document.getElementById("confettiCanvas");
+/* responsive confetti */
+const canvas = document.getElementById("confettiCanvas");
+function resize(){
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener("resize", resize);
 
-  const confettiInstance = confetti.create(canvas, { resize: true });
+const confettiInstance = confetti.create(canvas,{resize:true});
 
-  function celebrate() {
-    confettiInstance({
-      particleCount: 300,
-      spread: 140,
-      startVelocity: 60
-    });
-  }
-
-  /* yes grows */
-  let scale = 1;
-  function growYes() {
-    scale += .1;
-    yesBtn.style.transform = `translateY(-50%) scale(${scale})`;
-  }
-
-  /* no runs away */
-  function moveNo(x, y) {
-    const rect = zone.getBoundingClientRect();
-    const nx = Math.random() * (rect.width - 100);
-    const ny = Math.random() * (rect.height - 60);
-
-    noBtn.style.left = nx + "px";
-    noBtn.style.top = ny + "px";
-    noBtn.style.transform = "none";
-
-    growYes();
-  }
-
-  zone.addEventListener("pointermove", e => {
-    const b = noBtn.getBoundingClientRect();
-    const d = Math.hypot(
-      (b.left + b.width/2) - e.clientX,
-      (b.top + b.height/2) - e.clientY
-    );
-    if (d < 120) moveNo(e.clientX, e.clientY);
+function celebrate(){
+  confettiInstance({
+    particleCount:300,
+    spread:140,
+    startVelocity:60
   });
+}
 
-  yesBtn.addEventListener("click", () => {
-    zone.style.display = "none";
-    result.style.display = "block";
-    celebrate();
-  });
+/* grow yes */
+let scale = 1;
+function growYes(){
+  scale += .08;
+  yesBtn.style.transform = `translateY(-50%) scale(${scale})`;
+}
+
+/* mobile-safe random move */
+function moveNo(){
+  const rect = zone.getBoundingClientRect();
+  const padding = 10;
+
+  const nx = Math.random() * (rect.width - noBtn.offsetWidth - padding);
+  const ny = Math.random() * (rect.height - noBtn.offsetHeight - padding);
+
+  noBtn.style.left = nx + "px";
+  noBtn.style.top = ny + "px";
+  noBtn.style.transform = "none";
+
+  growYes();
+}
+
+/* works for both mouse + touch */
+zone.addEventListener("pointermove", e=>{
+  const b = noBtn.getBoundingClientRect();
+  const d = Math.hypot(
+    (b.left+b.width/2)-e.clientX,
+    (b.top+b.height/2)-e.clientY
+  );
+  if(d < 120) moveNo();
+});
+
+/* tap no also runs */
+noBtn.addEventListener("pointerdown", moveNo);
+
+yesBtn.addEventListener("click", ()=>{
+  zone.style.display="none";
+  result.style.display="block";
+  celebrate();
+});
 </script>
 
 </body>
