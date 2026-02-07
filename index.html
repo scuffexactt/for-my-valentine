@@ -2,165 +2,179 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>For Sneha 💖</title>
 
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Pacifico&display=swap" rel="stylesheet">
 
 <style>
 :root{
   --pink1:#ffe6f0;
-  --pink2:#ffd1e6;
+  --pink2:#ffd6ea;
   --pink3:#ff6fa9;
   --pink4:#ff3b8d;
 }
 
-*{
-  box-sizing:border-box;
-  font-family:"Poppins",sans-serif;
-  -webkit-tap-highlight-color:transparent;
-}
+*{box-sizing:border-box;font-family:"Poppins",sans-serif}
 
+/* ---------------- BODY ---------------- */
 body{
   margin:0;
   min-height:100vh;
-  padding:env(safe-area-inset-top) 16px env(safe-area-inset-bottom);
   display:flex;
-  align-items:center;
   justify-content:center;
-  background:linear-gradient(135deg,var(--pink1),#f5e9ff);
+  align-items:center;
+  background:linear-gradient(135deg,var(--pink1),var(--pink2));
   overflow:hidden;
+  padding:16px;
+  cursor:none; /* hide default for sparkles */
 }
 
-/* floating hearts background */
+/* floating hearts bg */
 body::before{
-  content:"💗 💕 💖 💞 💓 💘 💝 💗 💕 💖 💞 💓 💘 💝";
+  content:"💗 💕 💖 💞 💘 💝 💓 💗 💕 💖 💞 💘 💝 💓";
   position:fixed;
-  font-size:22px;
   opacity:.12;
+  font-size:22px;
+  animation:float 25s linear infinite;
   width:200%;
-  height:200%;
-  animation:float 35s linear infinite;
-  pointer-events:none;
+  line-height:70px;
 }
-
 @keyframes float{
   from{transform:translateY(0)}
   to{transform:translateY(-50%)}
 }
 
+/* confetti */
 #confettiCanvas{
   position:fixed;
   inset:0;
   pointer-events:none;
-  z-index:999;
+  z-index:10;
 }
 
-/* card */
+/* ---------------- CARD ---------------- */
 .card{
   width:100%;
-  max-width:520px;
-  padding:32px 22px 36px;
+  max-width:560px;
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(12px);
+  padding:28px 22px;
+  border-radius:22px;
   text-align:center;
-  background:rgba(255,255,255,.85);
-  backdrop-filter:blur(18px);
-  border-radius:26px;
-  box-shadow:0 25px 60px rgba(255,105,160,.25);
+  box-shadow:0 20px 40px rgba(255,105,160,.25);
+  position:relative;
+  z-index:2;
 }
 
 h1{
-  font-size:clamp(22px,6vw,34px);
-  margin-bottom:8px;
-  color:#444;
+  font-family:"Pacifico",cursive;
+  font-size:22px;
+  font-weight:400;
+  color:#555;
+  margin:0 0 6px;
 }
 
 .subtitle{
-  font-size:14px;
-  opacity:.7;
-  margin-bottom:30px;
+  font-size:13px;
+  opacity:.65;
+  margin-bottom:20px;
 }
 
-/* buttons zone */
+/* ---------------- BUTTONS ---------------- */
 .button-zone{
+  display:flex;
+  justify-content:center;
+  gap:14px;
+  flex-wrap:wrap;
   position:relative;
-  width:100%;
-  height:clamp(150px,28vh,220px);
+  min-height:90px;
 }
 
-/* buttons */
 button{
-  position:absolute;
-  padding:18px 30px;
-  font-size:18px;
-  font-weight:700;
+  padding:10px 18px;
+  font-size:13px;
   border:none;
   border-radius:999px;
+  font-weight:600;
   cursor:pointer;
-  touch-action:manipulation;
-  box-shadow:0 10px 24px rgba(0,0,0,.15);
   transition:.2s;
+  box-shadow:0 6px 16px rgba(0,0,0,.12);
 }
+
+button:active{transform:scale(.95)}
 
 #yesBtn{
-  left:15%;
-  top:50%;
-  transform:translateY(-50%);
   background:linear-gradient(45deg,var(--pink3),var(--pink4));
-  color:white;
+  color:#fff;
 }
-
-#yesBtn:hover{
-  transform:translateY(-50%) scale(1.08);
-}
+#yesBtn:hover{transform:scale(1.08)}
 
 #noBtn{
-  left:60%;
-  top:50%;
-  transform:translateY(-50%);
-  background:#e5e7eb;
+  background:#eee;
+  position:relative;
 }
 
+/* ---------------- RESULT ---------------- */
 .result{
   display:none;
-  margin-top:24px;
-  animation:pop .4s ease;
+  margin-top:16px;
 }
 
-.result h2{
-  font-size:28px;
-  color:var(--pink4);
+.letter{
+  margin-top:12px;
+  padding:14px;
+  border-radius:14px;
+  background:#fff0f6;
+  font-size:13px;
+  line-height:1.6;
+  white-space:pre-line;
+  text-align:left;
+  min-height:120px;
 }
 
-@keyframes pop{
-  from{opacity:0;transform:scale(.9)}
-  to{opacity:1;transform:scale(1)}
-}
-
-/* music button */
-#musicToggle{
+/* ---------------- SPARKLES ---------------- */
+.sparkle{
   position:fixed;
-  bottom:18px;
-  right:18px;
-  z-index:1000;
-  border:none;
-  border-radius:50%;
-  width:48px;
-  height:48px;
-  font-size:20px;
-  background:white;
-  box-shadow:0 6px 18px rgba(0,0,0,.2);
+  pointer-events:none;
+  font-size:16px;
+  animation:fadeOut .8s linear forwards;
+  z-index:9999;
+}
+
+@keyframes fadeOut{
+  to{
+    transform:translateY(-10px) scale(.6);
+    opacity:0;
+  }
+}
+
+/* mobile */
+@media(max-width:480px){
+  .button-zone{
+    flex-direction:column;
+    align-items:center;
+  }
+  button{width:70%}
 }
 </style>
 </head>
 
 <body>
 
+<!-- 💕 Background music -->
+<audio id="bgMusic" loop>
+  <source src="song.mp3" type="audio/mpeg">
+</audio>
+
 <canvas id="confettiCanvas"></canvas>
 
 <div class="card">
+
   <h1>Sneha, will you be my Valentine? 💖</h1>
-  <div class="subtitle">I made this little website just for you ✨</div>
+  <div class="subtitle">I made this little surprise just for you ✨</div>
 
   <div class="button-zone" id="zone">
     <button id="yesBtn">Yessss 💕</button>
@@ -168,110 +182,103 @@ button{
   </div>
 
   <div class="result" id="result">
-    <h2>YAY SNEHA!! 🥰💗</h2>
-    <p>You just made my whole year brighter ✨</p>
-    <p>I love you more than all the stars ⭐</p>
+    <h3 style="color:#ff3b8d">For my pretty little princess 💌</h3>
+    <div class="letter" id="loveLetter"></div>
   </div>
+
 </div>
 
-<!-- MUSIC -->
-<audio id="bgMusic" loop>
-  <source src="What A Feeling.mp3" type="audio/mpeg">
-</audio>
-
-<button id="musicToggle">🔊</button>
-
 <script>
-/* ================= CONFETTI ================= */
-const canvas = document.getElementById("confettiCanvas");
-function resize(){
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-}
-resize();
-window.addEventListener("resize", resize);
+const zone=document.getElementById("zone");
+const yesBtn=document.getElementById("yesBtn");
+const noBtn=document.getElementById("noBtn");
+const result=document.getElementById("result");
+const letterEl=document.getElementById("loveLetter");
+const music=document.getElementById("bgMusic");
 
-const confettiInstance = confetti.create(canvas,{resize:true});
+/* ---------- MUSIC (starts on first tap due to browser rules) ---------- */
+document.addEventListener("pointerdown",()=>{
+  music.volume=0.5;
+  music.play().catch(()=>{});
+},{once:true});
+
+/* ---------- CONFETTI CENTER ---------- */
+const confettiInstance=confetti.create(
+  document.getElementById("confettiCanvas"),
+  {resize:true}
+);
 
 function celebrate(){
   confettiInstance({
     particleCount:300,
     spread:140,
-    startVelocity:60
+    origin:{x:0.5,y:0.5}
   });
 }
 
-/* ================= BUTTON LOGIC ================= */
-const zone = document.getElementById("zone");
-const yesBtn = document.getElementById("yesBtn");
-const noBtn = document.getElementById("noBtn");
-const result = document.getElementById("result");
-
-let scale = 1;
-
+/* ---------- YES grows ---------- */
+let scale=1;
 function growYes(){
-  scale += .08;
-  yesBtn.style.transform = `translateY(-50%) scale(${scale})`;
+  scale+=0.07;
+  yesBtn.style.transform=`scale(${scale})`;
 }
 
+/* ---------- NO runs ---------- */
 function moveNo(){
-  const rect = zone.getBoundingClientRect();
-  const padding = 10;
-
-  const nx = Math.random() * (rect.width - noBtn.offsetWidth - padding);
-  const ny = Math.random() * (rect.height - noBtn.offsetHeight - padding);
-
-  noBtn.style.left = nx + "px";
-  noBtn.style.top = ny + "px";
-  noBtn.style.transform = "none";
-
+  const rect=zone.getBoundingClientRect();
+  noBtn.style.position="absolute";
+  noBtn.style.left=Math.random()*(rect.width-80)+"px";
+  noBtn.style.top=Math.random()*(rect.height-40)+"px";
   growYes();
 }
+zone.addEventListener("pointermove",moveNo);
 
-zone.addEventListener("pointermove", e=>{
-  const b = noBtn.getBoundingClientRect();
-  const d = Math.hypot(
-    (b.left+b.width/2)-e.clientX,
-    (b.top+b.height/2)-e.clientY
-  );
-  if(d < 120) moveNo();
-});
+/* ---------- typing letter ---------- */
+const message=`Hi baby 💖
 
-noBtn.addEventListener("pointerdown", moveNo);
+From the moment you came into my life,
+everything feels softer and happier.
 
-yesBtn.addEventListener("click", ()=>{
+Your smile is my favorite thing in the world.
+
+Will you stay my Valentine forever? 💕
+
+Yours always ❤️`;
+
+function typeLetter(text,speed=30){
+  let i=0;
+  letterEl.textContent="";
+  (function type(){
+    if(i<text.length){
+      letterEl.textContent+=text[i++];
+      setTimeout(type,speed);
+    }
+  })();
+}
+
+yesBtn.onclick=()=>{
   zone.style.display="none";
   result.style.display="block";
   celebrate();
-});
+  typeLetter(message);
+};
 
-/* ================= MUSIC ================= */
-const music = document.getElementById("bgMusic");
-const toggle = document.getElementById("musicToggle");
+/* ---------- SPARKLY CURSOR TRAIL ---------- */
+const sparkles=["✨","💖","🌸","💗"];
 
-let started = false;
-
-function startMusic(){
-  if(started) return;
-  started = true;
-
-  music.volume = 0;
-  music.play();
-
-  let v = 0;
-  const fade = setInterval(()=>{
-    v += 0.05;
-    music.volume = v;
-    if(v >= 0.6) clearInterval(fade);
-  },120);
+function createSparkle(x,y){
+  const s=document.createElement("span");
+  s.className="sparkle";
+  s.textContent=sparkles[Math.floor(Math.random()*sparkles.length)];
+  s.style.left=x+"px";
+  s.style.top=y+"px";
+  document.body.appendChild(s);
+  setTimeout(()=>s.remove(),800);
 }
 
-document.body.addEventListener("pointerdown", startMusic, { once:true });
-
-toggle.onclick = ()=>{
-  music.muted = !music.muted;
-  toggle.textContent = music.muted ? "🔈" : "🔊";
-};
+document.addEventListener("pointermove",e=>{
+  createSparkle(e.clientX,e.clientY);
+});
 </script>
 
 </body>
