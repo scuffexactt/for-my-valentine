@@ -1,266 +1,216 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>For Sneha 💌</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>For Sneha 💗</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600&display=swap" rel="stylesheet"/>
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+  <!-- Cute font -->
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700&display=swap" rel="stylesheet"/>
 
-<style>
-:root{
-  --pink:#ff7aa8;
-  --pink2:#ffc2da;
-  --lav:#efe3ff;
-  --text:#5b335f;
-}
+  <!-- Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 
-*{box-sizing:border-box;}
+  <style>
+    :root {
+      --pink: #ff7aa8;
+      --pink2: #ffc2da;
+      --lav: #e9d5ff;
+      --card: rgba(255,255,255,0.75);
+      --text: #5b335f;
+    }
 
-body{
-  margin:0;
-  min-height:100svh;
-  font-family:"Quicksand",sans-serif;
-  color:var(--text);
-  overflow:hidden;
+    * { box-sizing: border-box; }
 
-  background:
-    radial-gradient(circle at 25% 20%, #fff0f6, transparent 40%),
-    radial-gradient(circle at 80% 80%, #f3e8ff, transparent 40%),
-    linear-gradient(135deg,var(--pink2),var(--lav));
+    body {
+      margin: 0;
+      font-family: "Baloo 2", system-ui, sans-serif;
+      min-height: 100svh;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
 
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:18px;
-}
+      /* dreamy gradient */
+      background:
+        radial-gradient(circle at 20% 20%, #fff0f6, transparent 40%),
+        radial-gradient(circle at 80% 80%, #f3e8ff, transparent 40%),
+        linear-gradient(135deg, var(--pink2), var(--lav));
+    }
 
-/* floating hearts background */
-body::before{
-  content:"💗 💕 💖 💞 💓 💘";
-  position:fixed;
-  font-size:52px;
-  opacity:.06;
-  letter-spacing:45px;
-  animation:float 26s linear infinite;
-  white-space:nowrap;
-}
+    /* floating hearts background */
+    body::before {
+      content: "💗 💕 💖 💞 💓 💘";
+      position: fixed;
+      font-size: 60px;
+      opacity: .08;
+      letter-spacing: 60px;
+      animation: float 25s linear infinite;
+      white-space: nowrap;
+    }
 
-@keyframes float{
-  from{transform:translateY(110vh);}
-  to{transform:translateY(-120vh);}
-}
+    @keyframes float {
+      from { transform: translateY(100vh); }
+      to   { transform: translateY(-120vh); }
+    }
 
-/* envelope */
-.envelope{
-  width:100%;
-  max-width:420px;
-  height:200px;
-  background:#fff;
-  border-radius:22px;
-  box-shadow:0 18px 50px rgba(0,0,0,.15);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-  position:relative;
-  font-weight:600;
-  transition:.4s;
-}
+    #confettiCanvas {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 999;
+    }
 
-.envelope:active{transform:scale(.97);}
+    .card {
+      width: min(720px, 92vw);
+      padding: 36px 28px;
+      text-align: center;
 
-.envelope span{
-  font-size:20px;
-}
+      background: var(--card);
+      backdrop-filter: blur(18px);
+      border-radius: 30px;
+      box-shadow: 0 30px 80px rgba(0,0,0,.15);
+      animation: pop .4s ease;
+    }
 
-/* letter card */
-.card{
-  display:none;
-  width:100%;
-  max-width:420px;
-  max-height:85vh;
-  overflow:auto;
+    h1 {
+      font-size: clamp(28px, 5vw, 48px);
+      color: var(--text);
+      margin: 10px 0 20px;
+    }
 
-  background:rgba(255,255,255,.78);
-  backdrop-filter:blur(18px);
-  border-radius:26px;
-  padding:26px 22px;
-  box-shadow:0 25px 70px rgba(0,0,0,.15);
+    .sub {
+      font-size: 18px;
+      margin-bottom: 18px;
+      opacity: .8;
+    }
 
-  animation:pop .35s ease;
-}
+    .button-zone {
+      position: relative;
+      width: 100%;
+      height: 150px;
+      margin-top: 12px;
+    }
 
-@keyframes pop{
-  from{opacity:0;transform:scale(.92);}
-  to{opacity:1;}
-}
+    button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      padding: 16px 28px;
+      font-size: 18px;
+      font-weight: 700;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      transition: all .18s ease;
+      box-shadow: 0 10px 25px rgba(0,0,0,.15);
+    }
 
-.title{
-  font-family:"Pacifico",cursive;
-  font-size:34px;
-  text-align:center;
-  color:var(--pink);
-  margin-bottom:12px;
-}
+    #yesBtn {
+      left: 18%;
+      background: linear-gradient(45deg, #ff6aa2, #ff8bc2);
+      color: white;
+    }
 
-/* letter text */
-.letter{
-  font-size:16px;
-  line-height:1.7;
-  white-space:pre-line;
-  min-height:140px;
-  margin-bottom:18px;
-}
+    #yesBtn:hover {
+      transform: translateY(-50%) scale(1.1);
+    }
 
-/* question */
-.question{
-  text-align:center;
-  font-weight:600;
-  font-size:20px;
-  margin-bottom:12px;
-}
+    #noBtn {
+      left: 62%;
+      background: #fff;
+      color: #444;
+    }
 
-/* mobile big buttons */
-.button-zone{
-  position:relative;
-  height:140px;
-}
+    .hint {
+      font-size: 14px;
+      margin-top: 10px;
+      opacity: .65;
+      font-style: italic;
+    }
 
-button{
-  position:absolute;
-  width:120px;
-  height:50px;
-  border:none;
-  border-radius:999px;
-  font-size:16px;
-  font-weight:600;
-  cursor:pointer;
-  box-shadow:0 8px 20px rgba(0,0,0,.15);
-}
+    .result {
+      display: none;
+      margin-top: 22px;
+      animation: pop .4s ease;
+    }
 
-#yesBtn{
-  left:10%;
-  background:linear-gradient(45deg,#ff6aa2,#ff8bc2);
-  color:white;
-}
+    .result h2 {
+      font-size: 44px;
+      color: #ff4d8d;
+    }
 
-#noBtn{
-  right:10%;
-  background:white;
-}
+    .fireworks {
+      width: 300px;
+      border-radius: 18px;
+      margin-top: 10px;
+    }
 
-.result{
-  display:none;
-  text-align:center;
-  font-family:"Pacifico";
-  font-size:30px;
-  color:#ff4d8d;
-  margin-top:16px;
-}
-
-#confettiCanvas{
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  z-index:999;
-}
-
-/* small phones */
-@media (max-width:380px){
-  button{width:105px;height:46px;}
-}
-</style>
+    @keyframes pop {
+      from { opacity: 0; transform: scale(.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
 </head>
 
 <body>
-
 <canvas id="confettiCanvas"></canvas>
 
-<!-- envelope intro -->
-<div class="envelope" id="envelope">
-  <span>Tap to open 💌</span>
-</div>
+<main class="card">
 
-<!-- letter -->
-<div class="card" id="card">
+  <h1>Hey Sneha 💗</h1>
+  <div class="sub">Will you be my Valentine? 🥺✨</div>
 
-  <div class="title">Dear Sneha 💕</div>
-
-  <div class="letter" id="letterText"></div>
-
-  <div class="question">Will you be my Valentine?</div>
-
-  <div class="button-zone" id="zone">
-    <button id="yesBtn">Yes 💖</button>
+  <section class="button-zone" id="zone">
+    <button id="yesBtn">YES 💕</button>
     <button id="noBtn">No 🙈</button>
-  </div>
+  </section>
 
-  <div class="result" id="result">She said YES!! 🎉✨</div>
+  <div class="hint" id="hint">the "no" button is a little shy hehe</div>
 
-</div>
+  <section class="result" id="result">
+    <h2>She said YES!! 💖🎉</h2>
+    <img
+      class="fireworks"
+      src="https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif"
+    />
+  </section>
+
+</main>
 
 <script>
-/* ---------- envelope open ---------- */
-const envelope=document.getElementById("envelope");
-const card=document.getElementById("card");
+const zone = document.getElementById("zone");
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const result = document.getElementById("result");
+const hint = document.getElementById("hint");
 
-envelope.onclick=()=>{
-  envelope.style.display="none";
-  card.style.display="block";
-  typeLetter();
-};
+const confettiCanvas = document.getElementById("confettiCanvas");
 
-/* ---------- typewriter text ---------- */
-const message=`Somehow you became my favorite person.
-
-Your smile makes my day softer.
-Your laugh feels like home.
-
-So I made this tiny love note
-just to ask you something special 💗`;
-
-const letter=document.getElementById("letterText");
-
-function typeLetter(){
-  let i=0;
-  const interval=setInterval(()=>{
-    letter.textContent+=message[i];
-    i++;
-    if(i>=message.length) clearInterval(interval);
-  },25);
+function resize() {
+  confettiCanvas.width = window.innerWidth;
+  confettiCanvas.height = window.innerHeight;
 }
+resize();
+window.addEventListener("resize", resize);
 
-/* ---------- confetti ---------- */
-const confettiInstance=confetti.create(
-  document.getElementById("confettiCanvas"),
-  {resize:true}
-);
+const confettiInstance = confetti.create(confettiCanvas, { resize: true });
 
-function celebrate(){
+function fullScreenConfetti() {
   confettiInstance({
-    particleCount:350,
-    spread:130,
-    startVelocity:60,
-    origin:{x:.5,y:.6}
+    particleCount: 400,
+    spread: 140,
+    startVelocity: 60,
+    origin: { x: .5, y: .6 }
   });
 }
 
-/* ---------- buttons ---------- */
-const zone=document.getElementById("zone");
-const yesBtn=document.getElementById("yesBtn");
-const noBtn=document.getElementById("noBtn");
-const result=document.getElementById("result");
-
-let scale=1;
-
-function growYes(){
-  scale+=.1;
-  yesBtn.style.transform=`scale(${scale})`;
+let yesScale = 1;
+function growYes() {
+  yesScale += 0.1;
+  yesBtn.style.transform = `translateY(-50%) scale(${yesScale})`;
 }
 
-function clamp(n,min,max){return Math.max(min,Math.min(max,n));}
+function clamp(n,min,max){ return Math.max(min,Math.min(max,n)); }
 
 function moveNo(px,py){
   const z=zone.getBoundingClientRect();
@@ -269,17 +219,17 @@ function moveNo(px,py){
   let dx=(b.left+b.width/2)-px;
   let dy=(b.top+b.height/2)-py;
   let mag=Math.hypot(dx,dy)||1;
-
   dx/=mag; dy/=mag;
 
-  let newLeft=(b.left-z.left)+dx*120;
-  let newTop=(b.top-z.top)+dy*120;
+  let newLeft=(b.left-z.left)+dx*150;
+  let newTop=(b.top-z.top)+dy*150;
 
   newLeft=clamp(newLeft,0,z.width-b.width);
   newTop=clamp(newTop,0,z.height-b.height);
 
   noBtn.style.left=newLeft+"px";
   noBtn.style.top=newTop+"px";
+  noBtn.style.transform="none";
 
   growYes();
 }
@@ -287,14 +237,15 @@ function moveNo(px,py){
 zone.addEventListener("pointermove",e=>{
   const b=noBtn.getBoundingClientRect();
   const d=Math.hypot((b.left+b.width/2)-e.clientX,(b.top+b.height/2)-e.clientY);
-  if(d<120) moveNo(e.clientX,e.clientY);
+  if(d<140) moveNo(e.clientX,e.clientY);
 });
 
-yesBtn.onclick=()=>{
+yesBtn.addEventListener("click",()=>{
   zone.style.display="none";
+  hint.style.display="none";
   result.style.display="block";
-  celebrate();
-};
+  fullScreenConfetti();
+});
 </script>
 
 </body>
