@@ -1,165 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>For Sneha 💖</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>For Sneha 💖</title>
 
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Pacifico&display=swap" rel="stylesheet">
 
-  <style>
-    :root{
-      --pink1:#ffe6f0;
-      --pink2:#ffd6ea;
-      --pink3:#ff6fa9;
-      --pink4:#ff3b8d;
-    }
+<style>
+:root{
+  --pink1:#ffe6f0;
+  --pink2:#ffd6ea;
+  --pink3:#ff6fa9;
+  --pink4:#ff3b8d;
+}
 
-    *{box-sizing:border-box;font-family:"Poppins",sans-serif;}
+*{box-sizing:border-box;font-family:"Poppins",sans-serif}
 
-    body{
-      margin:0;
-      min-height:100vh;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      background:linear-gradient(135deg,var(--pink1),var(--pink2));
-      overflow:hidden;
-      padding:16px;
-    }
+/* ---------------- BODY ---------------- */
+body{
+  margin:0;
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(135deg,var(--pink1),var(--pink2));
+  overflow:hidden;
+  padding:16px;
+  cursor:none; /* hide default for sparkles */
+}
 
-    /* floating hearts */
-    body::before{
-      content:"💗 💕 💖 💞 💘 💝 💓 💗 💕 💖 💞 💘 💝 💓";
-      position:fixed;
-      opacity:.12;
-      font-size:22px;
-      animation:float 25s linear infinite;
-      width:200%;
-      line-height:70px;
-    }
+/* floating hearts bg */
+body::before{
+  content:"💗 💕 💖 💞 💘 💝 💓 💗 💕 💖 💞 💘 💝 💓";
+  position:fixed;
+  opacity:.12;
+  font-size:22px;
+  animation:float 25s linear infinite;
+  width:200%;
+  line-height:70px;
+}
+@keyframes float{
+  from{transform:translateY(0)}
+  to{transform:translateY(-50%)}
+}
 
-    @keyframes float{
-      from{transform:translateY(0)}
-      to{transform:translateY(-50%)}
-    }
+/* confetti */
+#confettiCanvas{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:10;
+}
 
-    #confettiCanvas{
-      position:fixed;
-      inset:0;
-      pointer-events:none;
-      z-index:10;
-    }
+/* ---------------- CARD ---------------- */
+.card{
+  width:100%;
+  max-width:560px;
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(12px);
+  padding:28px 22px;
+  border-radius:22px;
+  text-align:center;
+  box-shadow:0 20px 40px rgba(255,105,160,.25);
+  position:relative;
+  z-index:2;
+}
 
-    .card{
-      width:100%;
-      max-width:560px;
-      background:rgba(255,255,255,.92);
-      backdrop-filter:blur(12px);
-      padding:28px 22px;
-      border-radius:22px;
-      text-align:center;
-      box-shadow:0 20px 40px rgba(255,105,160,.25);
-      position:relative;
-    }
+h1{
+  font-family:"Pacifico",cursive;
+  font-size:22px;
+  font-weight:400;
+  color:#555;
+  margin:0 0 6px;
+}
 
-    /* smaller softer title */
-    h1{
-      font-family:"Pacifico",cursive;
-      font-size:22px;
-      font-weight:400;
-      color:#555;
-      margin:0 0 6px;
-    }
+.subtitle{
+  font-size:13px;
+  opacity:.65;
+  margin-bottom:20px;
+}
 
-    .subtitle{
-      font-size:13px;
-      opacity:.65;
-      margin-bottom:20px;
-    }
+/* ---------------- BUTTONS ---------------- */
+.button-zone{
+  display:flex;
+  justify-content:center;
+  gap:14px;
+  flex-wrap:wrap;
+  position:relative;
+  min-height:90px;
+}
 
-    /* button container */
-    .button-zone{
-      display:flex;
-      justify-content:center;
-      gap:14px;
-      flex-wrap:wrap;
-      position:relative;
-      min-height:90px;
-    }
+button{
+  padding:10px 18px;
+  font-size:13px;
+  border:none;
+  border-radius:999px;
+  font-weight:600;
+  cursor:pointer;
+  transition:.2s;
+  box-shadow:0 6px 16px rgba(0,0,0,.12);
+}
 
-    /* polished buttons */
-    button{
-      padding:10px 18px;
-      font-size:13px;
-      border:none;
-      border-radius:999px;
-      font-weight:600;
-      cursor:pointer;
-      transition:.2s;
-      box-shadow:0 6px 16px rgba(0,0,0,.12);
-    }
+button:active{transform:scale(.95)}
 
-    button:active{transform:scale(.95)}
+#yesBtn{
+  background:linear-gradient(45deg,var(--pink3),var(--pink4));
+  color:#fff;
+}
+#yesBtn:hover{transform:scale(1.08)}
 
-    #yesBtn{
-      background:linear-gradient(45deg,var(--pink3),var(--pink4));
-      color:#fff;
-    }
+#noBtn{
+  background:#eee;
+  position:relative;
+}
 
-    #yesBtn:hover{transform:scale(1.08)}
+/* ---------------- RESULT ---------------- */
+.result{
+  display:none;
+  margin-top:16px;
+}
 
-    #noBtn{
-      background:#eee;
-      position:relative;
-    }
+.letter{
+  margin-top:12px;
+  padding:14px;
+  border-radius:14px;
+  background:#fff0f6;
+  font-size:13px;
+  line-height:1.6;
+  white-space:pre-line;
+  text-align:left;
+  min-height:120px;
+}
 
-    .result{
-      display:none;
-      margin-top:16px;
-      animation:fade .4s ease;
-    }
+/* ---------------- SPARKLES ---------------- */
+.sparkle{
+  position:fixed;
+  pointer-events:none;
+  font-size:16px;
+  animation:fadeOut .8s linear forwards;
+  z-index:9999;
+}
 
-    @keyframes fade{
-      from{opacity:0;transform:scale(.95)}
-      to{opacity:1}
-    }
+@keyframes fadeOut{
+  to{
+    transform:translateY(-10px) scale(.6);
+    opacity:0;
+  }
+}
 
-    .letter{
-      margin-top:12px;
-      padding:14px;
-      border-radius:14px;
-      background:#fff0f6;
-      font-size:13px;
-      line-height:1.6;
-      white-space:pre-line;
-      text-align:left;
-      min-height:120px;
-    }
-
-    .letter::after{
-      content:"|";
-      animation:blink 1s infinite;
-    }
-
-    @keyframes blink{50%{opacity:0}}
-
-    /* mobile */
-    @media(max-width:480px){
-      .button-zone{
-        flex-direction:column;
-        align-items:center;
-      }
-      button{
-        width:70%;
-      }
-    }
-  </style>
+/* mobile */
+@media(max-width:480px){
+  .button-zone{
+    flex-direction:column;
+    align-items:center;
+  }
+  button{width:70%}
+}
+</style>
 </head>
 
 <body>
+
+<!-- 💕 Background music -->
+<audio id="bgMusic" loop>
+  <source src="song.mp3" type="audio/mpeg">
+</audio>
 
 <canvas id="confettiCanvas"></canvas>
 
@@ -174,59 +182,59 @@
   </div>
 
   <div class="result" id="result">
-    <h3 style="color:#ff3b8d;margin:0;">For my pretty little princess 💌</h3>
+    <h3 style="color:#ff3b8d">For my pretty little princess 💌</h3>
     <div class="letter" id="loveLetter"></div>
   </div>
 
 </div>
 
 <script>
-  const zone = document.getElementById("zone");
-  const yesBtn = document.getElementById("yesBtn");
-  const noBtn = document.getElementById("noBtn");
-  const result = document.getElementById("result");
-  const letterEl = document.getElementById("loveLetter");
+const zone=document.getElementById("zone");
+const yesBtn=document.getElementById("yesBtn");
+const noBtn=document.getElementById("noBtn");
+const result=document.getElementById("result");
+const letterEl=document.getElementById("loveLetter");
+const music=document.getElementById("bgMusic");
 
-  /* CENTERED CONFETTI */
-  const confettiInstance = confetti.create(
-    document.getElementById("confettiCanvas"),
-    { resize:true }
-  );
+/* ---------- MUSIC (starts on first tap due to browser rules) ---------- */
+document.addEventListener("pointerdown",()=>{
+  music.volume=0.5;
+  music.play().catch(()=>{});
+},{once:true});
 
-  function celebrate(){
-    const duration = 1500;
-    const end = Date.now() + duration;
+/* ---------- CONFETTI CENTER ---------- */
+const confettiInstance=confetti.create(
+  document.getElementById("confettiCanvas"),
+  {resize:true}
+);
 
-    (function frame(){
-      confettiInstance({
-        particleCount:12,
-        spread:100,
-        origin:{x:0.5,y:0.5}
-      });
-      if(Date.now() < end) requestAnimationFrame(frame);
-    })();
-  }
+function celebrate(){
+  confettiInstance({
+    particleCount:300,
+    spread:140,
+    origin:{x:0.5,y:0.5}
+  });
+}
 
-  /* YES grows */
-  let scale=1;
-  function growYes(){
-    scale+=0.07;
-    yesBtn.style.transform=`scale(${scale})`;
-  }
+/* ---------- YES grows ---------- */
+let scale=1;
+function growYes(){
+  scale+=0.07;
+  yesBtn.style.transform=`scale(${scale})`;
+}
 
-  /* NO runs away but stays inside */
-  function moveNo(){
-    const rect=zone.getBoundingClientRect();
-    noBtn.style.position="absolute";
-    noBtn.style.left=Math.random()*(rect.width-80)+"px";
-    noBtn.style.top=Math.random()*(rect.height-40)+"px";
-    growYes();
-  }
+/* ---------- NO runs ---------- */
+function moveNo(){
+  const rect=zone.getBoundingClientRect();
+  noBtn.style.position="absolute";
+  noBtn.style.left=Math.random()*(rect.width-80)+"px";
+  noBtn.style.top=Math.random()*(rect.height-40)+"px";
+  growYes();
+}
+zone.addEventListener("pointermove",moveNo);
 
-  zone.addEventListener("pointermove",moveNo);
-
-  /* typing */
-  const message=`Hi baby 💖
+/* ---------- typing letter ---------- */
+const message=`Hi baby 💖
 
 From the moment you came into my life,
 everything feels softer and happier.
@@ -237,23 +245,40 @@ Will you stay my Valentine forever? 💕
 
 Yours always ❤️`;
 
-  function typeLetter(text,speed=30){
-    let i=0;
-    letterEl.textContent="";
-    (function type(){
-      if(i<text.length){
-        letterEl.textContent+=text[i++];
-        setTimeout(type,speed);
-      }
-    })();
-  }
+function typeLetter(text,speed=30){
+  let i=0;
+  letterEl.textContent="";
+  (function type(){
+    if(i<text.length){
+      letterEl.textContent+=text[i++];
+      setTimeout(type,speed);
+    }
+  })();
+}
 
-  yesBtn.addEventListener("click",()=>{
-    zone.style.display="none";
-    result.style.display="block";
-    celebrate();
-    typeLetter(message);
-  });
+yesBtn.onclick=()=>{
+  zone.style.display="none";
+  result.style.display="block";
+  celebrate();
+  typeLetter(message);
+};
+
+/* ---------- SPARKLY CURSOR TRAIL ---------- */
+const sparkles=["✨","💖","🌸","💗"];
+
+function createSparkle(x,y){
+  const s=document.createElement("span");
+  s.className="sparkle";
+  s.textContent=sparkles[Math.floor(Math.random()*sparkles.length)];
+  s.style.left=x+"px";
+  s.style.top=y+"px";
+  document.body.appendChild(s);
+  setTimeout(()=>s.remove(),800);
+}
+
+document.addEventListener("pointermove",e=>{
+  createSparkle(e.clientX,e.clientY);
+});
 </script>
 
 </body>
